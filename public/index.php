@@ -1,19 +1,19 @@
 <?php
-
-// Define some constants
-define('ROOT', __DIR__);
-define('APP', ROOT . '/app');
-define('CORE', ROOT . '/core');
-define('CONFIG', ROOT . '/config');
-define('PUBLIC', ROOT . '/public');
-
-// Include the autoloader
-require_once APP . '/Autoloader.php';
-$autoloader = new Autoloader();
-
-
-// Start the application
-$app = new Application();
-$app->run();
-
-
+require_once '../autoloader.php';
+Autoloader::register();
+require_once '../config/routes.php';
+try {
+    $url = $_SERVER['REQUEST_URI'];
+    foreach ($routes as $route) {
+        if (preg_match($route['pattern'], $url, $matches)) {
+            $controller = $route['controller'];
+            $action = $route['action'];
+            break;
+        }
+    }
+    $controller = new $controller();
+    $controller->$action();
+} catch (Exception $e) {
+    // handle errors
+}
+?>
