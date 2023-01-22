@@ -1,6 +1,6 @@
 <?php
 
-namespace Core;
+namespace core;
 
 class Injector
 {
@@ -25,6 +25,4 @@ class Injector
 
         return new $dependency;
     }
-
-
 }

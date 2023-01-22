@@ -1,7 +1,9 @@
 <?php
 
+use app\Controllers\HomeController;
+
 $routes = [
-    ['pattern' => '|^/$|', 'controller' => 'HomeController', 'action' => 'index'],
-    ['pattern' => '|^/users|', 'controller' => 'UsersController', 'action' => 'index'],
-    ['pattern' => '|^/users/(\d+)$|', 'controller' => 'UsersController', 'action' => 'view'],
+    ['pattern' => '|^/$|', 'controller' => HomeController::class, 'action' => 'index'],
+    ['pattern' => '|^/users$|', 'controller' => UsersController::class, 'action' => 'index'],
+    ['pattern' => '|^/users/(\d+)$|', 'controller' => UsersController::class, 'action' => 'view'],
 ];
