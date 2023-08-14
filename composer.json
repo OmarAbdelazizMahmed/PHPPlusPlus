@@ -1,0 +1,20 @@
+{
+    "name": "omar/php-plus-plus",
+    "description": "a php framework",
+    "authors": [
+        {
+            "name": "OmarAbdelazizMahmed",
+            "email": "omarabdelaziz@protonmail.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.5",
+        "symfony/var-dumper": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/",
+            "PHPPlusPlus\\": "src/"
+        }
+    }
+}
