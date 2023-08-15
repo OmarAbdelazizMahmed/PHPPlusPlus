@@ -2,6 +2,8 @@
 
 namespace PHPPlusPlus\Http;
 
+use PHPPlusPlus\View\View;
+
 class Route
 {
     public Request $request;
@@ -32,11 +34,9 @@ class Route
         $method = $this->request->method();
         $action = self::$routes[$method][$path] ?? false;
 
-        if($action === false){
-            $this->response->setStatusCode(404);
-            return "Not Found";
+        if(!array_key_exists($path,self::$routes[$method])){
+            return View::makeError('404');
         }
-
         if(is_callable($action)){
             return call_user_func_array($action,[]);
         }
