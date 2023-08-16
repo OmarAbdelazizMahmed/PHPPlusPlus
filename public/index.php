@@ -1,14 +1,17 @@
 <?php
 
-use PHPPlusPlus\Http\Request;
-use PHPPlusPlus\Http\Response;
-use PHPPlusPlus\Http\Route;
+use Dotenv\Dotenv;
+
 
 require_once __DIR__ . '/../src/Support/helpers.php';
-require_once base_path() . '/vendor/autoload.php';
 
-require_once base_path() . '/routes/web.php';
+require_once base_path() . 'vendor/autoload.php';
 
-$router = new Route(new Request(), new Response());
 
-($router->resolve());
+require_once base_path() . 'routes/web.php';
+
+$env = Dotenv::createImmutable(base_path());
+
+$env->load();
+
+app()->run();

@@ -1,5 +1,6 @@
 <?php
 
+use PHPPlusPlus\Application;;
 use PHPPlusPlus\View\View;
 
 if(!function_exists('env')) {
@@ -7,6 +8,8 @@ if(!function_exists('env')) {
         return $_ENV[$key] ?? value($default);
     }
 }
+
+
 
 if(!function_exists('value')) {
     function value($value) {
@@ -30,4 +33,15 @@ if(!function_exists('view')) {
     function view($view, $data = []) {
         return View::make($view, $data);
     }
+}
+
+if(!function_exists('app')) {
+   function app() {
+        static $instance = null;
+        if (!$instance) {
+            $instance = new Application();
+        }
+
+        return $instance;
+   }
 }
