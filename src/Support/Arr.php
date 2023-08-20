@@ -78,15 +78,15 @@ class Arr
         if (is_null($key)) {
             return;
         }
-        $keys = (array) $key;
-        while (count($keys) > 1) {
-            $key = array_shift($keys);
-            if (!static::exists($array, $key) || !static::accessible($array[$key])) {
-                $array[$key] = [];
+        $parts = explode('.', $key);
+        while (count($parts) > 1) {
+            $part = array_shift($parts);
+            if (!static::exists($array, $part) || !is_array($array[$part])) {
+                $array[$part] = [];
             }
-            $array = &$array[$key];
+            $array = &$array[$part];
         }
-        $array[array_shift($keys)] = $value;
+        $array[array_shift($parts)] = $value;
     }
 
     public static function last($array, callable $callback = null, $default = null)
