@@ -73,6 +73,22 @@ class Arr
         return $array;
     }
 
+    public static function set(&$array, $key, $value): void
+    {
+        if (is_null($key)) {
+            return;
+        }
+        $keys = (array) $key;
+        while (count($keys) > 1) {
+            $key = array_shift($keys);
+            if (!static::exists($array, $key) || !static::accessible($array[$key])) {
+                $array[$key] = [];
+            }
+            $array = &$array[$key];
+        }
+        $array[array_shift($keys)] = $value;
+    }
+
     public static function last($array, callable $callback = null, $default = null)
     {
         if (is_null($callback)) {
@@ -123,5 +139,20 @@ class Arr
             }
             unset($array[array_shift($parts)]);
         }
+    }
+
+    public static function flatten($array, $depth = INF): array
+    {
+        $result = [];
+        foreach ($array as $item) {
+            if (!is_array($item)) { 
+                $result[] = $item;
+            } elseif ($depth === 1) {
+                $result = array_merge($result, array_values($item));
+            } else {
+                $result = array_merge($result, static::flatten($item, $depth - 1));
+            }
+        }
+        return $result;
     }
 }
