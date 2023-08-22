@@ -89,6 +89,14 @@ class Arr
         $array[array_shift($parts)] = $value;
     }
 
+    public static function unset($array, $key): void
+    {
+        if (is_null($key)) {
+            return;
+        }
+        static::set($array, $key, null);
+    }
+
     public static function last($array, callable $callback = null, $default = null)
     {
         if (is_null($callback)) {
