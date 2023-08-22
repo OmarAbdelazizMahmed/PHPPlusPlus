@@ -15,3 +15,5 @@ $env = Dotenv::createImmutable(base_path());
 $env->load();
 
 app()->run();
+
+var_dump(app()->config);
